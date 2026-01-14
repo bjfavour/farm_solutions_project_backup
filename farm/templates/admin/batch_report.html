@@ -1,0 +1,165 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1 style="margin-bottom: 10px;">Batch Report: {{ batch.serial_number }}</h1>
+
+<style>
+    .report-section {
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+    }
+    .report-section h2 {
+        margin-bottom: 10px;
+        font-size: 20px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 5px;
+    }
+    table.report-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        margin-top: 10px;
+    }
+    table.report-table th, table.report-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    table.report-table th {
+        background: #f4f4f4;
+        font-weight: bold;
+    }
+    .summary-box {
+        padding: 10px;
+        background: #e8f3ff;
+        border-radius: 8px;
+        border: 1px solid #bcd7ff;
+        margin-top: 10px;
+    }
+</style>
+
+
+<!-- ======================= -->
+<!-- BATCH SUMMARY SECTION -->
+<!-- ======================= -->
+<div class="report-section">
+    <h2>Batch Summary</h2>
+
+    <div class="summary-box">
+        <p><strong>Animal Type:</strong> {{ batch.animal }}</p>
+        <p><strong>Arrival Date:</strong> {{ batch.arrival_date }}</p>
+        <p><strong>Initial Quantity:</strong> {{ batch.initial_quantity }}</p>
+        <p><strong>Current Quantity:</strong> {{ batch.current_quantity }}</p>
+
+        <hr>
+
+        <!-- ⭐ COST SUMMARY -->
+        <p><strong>Total Expenses:</strong> ₦{{ total_expenses }}</p>
+        <p><strong>Total Feeding Cost:</strong> ₦{{ total_feed }}</p>
+        <p><strong>Total Cost (Expenses + Feeding):</strong> 
+            <strong style="color:green;">₦{{ total_cost }}</strong>
+        </p>
+
+        <p><strong>Unit Cost per Livestock:</strong> 
+            <strong style="color:#b30000;">₦{{ unit_cost }}</strong>
+        </p>
+    </div>
+</div>
+
+
+<!-- ======================= -->
+<!-- EXPENSES TABLE -->
+<!-- ======================= -->
+<div class="report-section">
+    <h2>Expenses</h2>
+
+    <table class="report-table">
+        <tr>
+            <th>Description</th>
+            <th>Amount (₦)</th>
+            <th>Recorded By</th>
+            <th>Date</th>
+        </tr>
+
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e.description }}</td>
+            <td>{{ e.amount }}</td>
+            <td>{{ e.recorded_by }}</td>
+            <td>{{ e.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" style="text-align:center;">No expenses recorded.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- ======================= -->
+<!-- FEEDING RECORDS TABLE -->
+<!-- ======================= -->
+<div class="report-section">
+    <h2>Feeding Records</h2>
+
+    <table class="report-table">
+        <tr>
+            <th>Bags</th>
+            <th>Total Amount (₦)</th>
+            <th>Note</th>
+            <th>Recorded By</th>
+            <th>Date</th>
+        </tr>
+
+        {% for f in feedings %}
+        <tr>
+            <td>{{ f.bags }}</td>
+            <td>{{ f.amount }}</td>
+            <td>{{ f.note }}</td>
+            <td>{{ f.recorded_by }}</td>
+            <td>{{ f.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align:center;">No feeding records found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
+<!-- ======================= -->
+<!-- MORTALITY RECORDS TABLE -->
+<!-- ======================= -->
+<div class="report-section">
+    <h2>Mortality Records</h2>
+
+    <table class="report-table">
+        <tr>
+            <th>Count</th>
+            <th>Reason</th>
+            <th>Approved</th>
+            <th>Approved By</th>
+            <th>Date</th>
+        </tr>
+
+        {% for m in mortalities %}
+        <tr>
+            <td>{{ m.count }}</td>
+            <td>{{ m.reason }}</td>
+            <td>{{ m.approved }}</td>
+            <td>{{ m.approved_by }}</td>
+            <td>{{ m.created_at }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" style="text-align:center;">No mortality recorded.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

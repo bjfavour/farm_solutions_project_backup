@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h3>Farm Dashboard</h3>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<h2 class="title">Batches</h2>
+
+<div id="batchList" class="batch-list">Loading...</div>
+
+
+<!-- BACKDROP -->
+<div id="modalBackdrop" class="modal-backdrop"></div>
+
+<!-- FEEDING MODAL (FIXED) -->
+<div id="feedingModal" class="modal-box">
+    <h3>Add Feeding</h3>
+
+    <label>Number of Bags:</label>
+    <input id="feedingBags" type="number" placeholder="e.g. 5">
+
+    <label>Total Amount (₦):</label>
+    <input id="feedingAmount" type="number" placeholder="e.g. 15000">
+
+    <label>Note (Optional):</label>
+    <input id="feedingNote" type="text" placeholder="Starter feed">
+
+    <div class="modal-actions">
+        <button onclick="submitFeeding()">Save</button>
+        <button onclick="closeModals()">Close</button>
+    </div>
+</div>
+
+
+<!-- EXPENSE MODAL -->
+<div id="expenseModal" class="modal-box">
+    <h3>Add Expense</h3>
+    <input id="expenseDesc" type="text" placeholder="Description">
+    <input id="expenseAmount" type="number" placeholder="Amount">
+
+    <div class="modal-actions">
+        <button onclick="submitExpense()">Save</button>
+        <button onclick="closeModals()">Close</button>
+    </div>
+</div>
+
+<!-- MORTALITY MODAL -->
+<div id="mortalityModal" class="modal-box">
+    <h3>Report Mortality</h3>
+    <input id="mortalityCount" type="number" placeholder="Number dead">
+
+    <div class="modal-actions">
+        <button onclick="submitMortality()">Save</button>
+        <button onclick="closeModals()">Close</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

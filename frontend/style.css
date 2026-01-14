@@ -1,0 +1,153 @@
+/* GLOBAL */
+body {
+    margin: 0;
+    background: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+/* ===================== LOGIN PAGE ===================== */
+/* Applies only on pages WITHOUT .navbar (your login page) */
+body:not(:has(.navbar)) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+body:not(:has(.navbar)) h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+body:not(:has(.navbar)) form,
+body:not(:has(.navbar)) div {
+    /* in case you used a simple div layout */
+    display: inline-block;
+    background: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+body:not(:has(.navbar)) label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+body:not(:has(.navbar)) input {
+    width: 250px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+body:not(:has(.navbar)) button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 8px;
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+body:not(:has(.navbar)) #msg {
+    margin-top: 10px;
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* ===================== DASHBOARD PAGE ===================== */
+
+.navbar {
+    background: #1976d2;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logout-btn {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.title {
+    padding-left: 20px;
+}
+
+/* BATCH CARDS */
+.batch-list {
+    padding: 20px;
+}
+
+.batch {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-small {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-right: 6px;
+    cursor: pointer;
+}
+
+/* MODAL BACKDROP */
+.modal-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.45);
+    z-index: 99;
+}
+
+/* MODAL BOX */
+.modal-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.modal-box input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-actions {
+    margin-top: 15px;
+    text-align: right;
+}
+
+.modal-actions button {
+    margin-left: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+}
