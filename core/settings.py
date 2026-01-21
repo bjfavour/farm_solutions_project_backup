@@ -193,21 +193,3 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
 
 
-if not DEBUG:
-    try:
-        from django.contrib.auth import get_user_model
-        User = get_user_model()
-
-        username = os.environ.get("DJANGO_SUPERUSER_USERNAME")
-        email = os.environ.get("DJANGO_SUPERUSER_EMAIL")
-        password = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
-
-        if username and password:
-            if not User.objects.filter(username=username).exists():
-                User.objects.create_superuser(
-                    username=bjfavour,
-                    email=email or "bj.favour1@gmail.com",
-                    password=Loveme4177@@,
-                )
-    except Exception:
-        pass
