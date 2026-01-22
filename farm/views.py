@@ -14,7 +14,7 @@ from .serializers import (AnimalTypeSerializer, BatchSerializer, ExpenseSerializ
 from .permissions import IsStaffOrAdmin
 
 class RegisterAPIView(APIView):
-    permission_classes = []  # allow anyone
+    permission_classes = [AllowAny]  # ✅ explicit public access
 
     def post(self, request):
         username = request.data.get("username")
@@ -36,7 +36,11 @@ class RegisterAPIView(APIView):
             password=make_password(password)
         )
 
-        return Response({"success": True, "message": "User created successfully"}, status=201)
+        return Response(
+            {"success": True, "message": "User created successfully"},
+            status=status.HTTP_201_CREATED
+        )
+
 
 class AnimalTypeViewSet(viewsets.ModelViewSet):
     queryset = AnimalType.objects.all()

@@ -2,7 +2,9 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
+# --------------------------------------------------
+# LOAD ENV
+# --------------------------------------------------
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,7 +55,7 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # MUST be before CommonMiddleware
 
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -67,7 +69,6 @@ MIDDLEWARE = [
 # --------------------------------------------------
 
 ROOT_URLCONF = "core.urls"
-
 WSGI_APPLICATION = "core.wsgi.application"
 
 # --------------------------------------------------
@@ -121,14 +122,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # --------------------------------------------------
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "Africa/Lagos"
-
 USE_I18N = True
 USE_TZ = True
 
 # --------------------------------------------------
-# STATIC FILES (WhiteNoise)
+# STATIC FILES
 # --------------------------------------------------
 
 STATIC_URL = "/static/"
@@ -145,13 +144,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # --------------------------------------------------
 # DJANGO REST FRAMEWORK
 # --------------------------------------------------
+# IMPORTANT:
+# - Registration & login must be PUBLIC
+# - Other APIs stay protected
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ),
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
@@ -161,35 +163,44 @@ REST_FRAMEWORK = {
 }
 
 # --------------------------------------------------
-# CORS SETTINGS
+# CORS SETTINGS (FRONTEND ON CPANEL)
 # --------------------------------------------------
 
 CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOWED_ORIGINS = [
     "https://bjfarms.com.ng",
-    "https://farmsolutionsprojectbackup-production.up.railway.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "origin",
+    "dnt",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 # --------------------------------------------------
-# CSRF SETTINGS (FIXES 403 ERROR)
+# CSRF SETTINGS
 # --------------------------------------------------
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://*.railway.app",
     "https://bjfarms.com.ng",
+    "https://*.railway.app",
 ]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 # --------------------------------------------------
-# SECURITY (PRODUCTION SAFE)
+# SECURITY
 # --------------------------------------------------
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = not DEBUG
-
-
